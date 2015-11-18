@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 class Answer(models.Model):
     text = models.TextField()
@@ -15,3 +16,6 @@ class Question(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('qa:q-detail', kwargs={'pk': self.pk})
