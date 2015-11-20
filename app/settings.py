@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'qa',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +106,5 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'collected_static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+INTERNAL_IPS = ['127.0.0.1']
