@@ -3,9 +3,10 @@ from django.views.generic import ListView, DetailView
 from .models import Question, Answer
 
 class QuestionsList(ListView):
-    template_name='qa/questions_list.html'
+    template_name = 'qa/questions_list.html'
     model = Question
+    paginate_by = 10
 
 class QuestionDetail(DetailView):
-    template_name='qa/question_detail.html'
+    template_name = 'qa/question_detail.html'
     model = Question

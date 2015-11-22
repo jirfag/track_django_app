@@ -1,0 +1,8 @@
+{% load app %}
+<nav>
+  <ul class="pagination">
+  {% for pn in page_range %}
+    {% paginator_number pn %}
+  {% endfor %}
+  </ul>
+</nav>

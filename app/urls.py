@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from .views import get_current_time
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^questions/', include('qa.urls', app_name='qa', namespace='qa')),
+    url(r'^test/current_time', get_current_time, name='get-current-time'),
 ]

@@ -4,13 +4,49 @@
   <div class="row">
     <div class="col-md-12">
     {% for q in object_list %}
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <a href="{{ q.get_absolute_url }}">{{ q.title }}</a>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <a href="{{ q.get_absolute_url }}">{{ q.title }}</a>
+        </div>
+        <div class="panel-footer">{{ q.text }}</div>
       </div>
-      <div class="panel-footer">{{ q.text }}</div>
-    </div>
     {% endfor %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <nav>
+        <ul class="pagination">
+        {% comment %}
+        {% for i in paginator.page_range %}
+          <li>
+            <a href="{% url 'qa:q-list' %}?page={{ i }}">{{ i }}</a>
+          </li>
+        {% endfor %}
+        {% endcomment %}
+
+        {% comment %}
+          <li><a href="{% url 'qa:q-list' %}?page=1">1</a></li>
+          <li class="disabled"><a href="#">...</a></li>
+          <li class="active"><a href="#">{{ page_obj.number }}</a></li>
+          <li class="disabled"><a href="#">...</a></li>
+          <li><a href="{% url 'qa:q-list' %}?page={{ paginator.num_pages}}">{{ paginator.num_pages}}</a></li>
+        {% endcomment %}
+
+        {% comment %}
+          {% load app %}
+          {% paginator_number 1 %}
+          {% paginator_number "." %}
+          {% paginator_number page_obj.number %}
+          {% paginator_number "." %}
+          {% paginator_number paginator.num_pages %}
+        {% endcomment %}
+
+        </ul>
+      </nav>
+
+      {% load app %}
+      {% pagination %}
     </div>
   </div>
 {% endblock %}

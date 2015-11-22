@@ -38,11 +38,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'qa',
+    'app',
     'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
-    'app.middleware.MyCacheMiddleware',
+#    'app.middleware.MyCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
