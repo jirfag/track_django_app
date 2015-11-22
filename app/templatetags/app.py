@@ -7,7 +7,8 @@ DOT = '.'
 def build_query_string(request, new_params):
     get_params_copy = request.GET.copy()
     for k, v in new_params.items():
-        del get_params_copy[k]
+        if k in get_params_copy:
+            del get_params_copy[k]
         get_params_copy[k] = v
     return '?{}'.format(get_params_copy.urlencode())
 
