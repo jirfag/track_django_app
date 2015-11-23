@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load app %}
 
 {% block content %}
   <div class="row">
@@ -6,9 +7,9 @@
     {% for q in object_list %}
       <div class="panel panel-default">
         <div class="panel-body">
-          <a href="{{ q.get_absolute_url }}">{{ q.title }}</a>
+          <a href="{{ q.get_absolute_url }}">{{ q.title }} (rating: {{ q.likes_rating }})</a>
         </div>
-        <div class="panel-footer">{{ q.text }}</div>
+        <div class="panel-footer">{{ q.text|truncatechars:50 }}</div>
       </div>
     {% endfor %}
     </div>
@@ -45,7 +46,6 @@
         </ul>
       </nav>
 
-      {% load app %}
       {% pagination %}
     </div>
   </div>

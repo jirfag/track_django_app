@@ -45,8 +45,18 @@ def pagination(context):
                           range(paginator.num_pages - ON_ENDS, paginator.num_pages)]
         else:
             subranges.append(range(page_num + 1, paginator.num_pages))
+        page_range = sum(map(list, subranges), [])
 
-    page_range = sum(map(list, subranges), [])
     page_range = [((pn + 1) if pn != DOT else DOT) for pn in page_range]
 
     return {'page_range': page_range, 'page_obj': page_obj, 'request': context['request']}
+
+@register.filter
+def truncatechars_by_words(value, max_length):
+    if len(value) <= max_length:
+        return value
+
+    truncd_val = value[:max_length]
+    if len(value) != max_length + 1 and value[max_length + 1] != ' ':
+        truncd_val = truncd_val[:truncd_val.rfind(' ')]
+    return truncd_val + '...'
