@@ -4,9 +4,10 @@ from django.contrib.contenttypes.fields import GenericRelation
 from lib.models import Tag, Liker
 
 def _likes_rating(self):
+    return self.likes_n
     r = 0
     for like in self.likes.all():
-        r += (1 if like.is_like else 0)
+        r += (1 if like.is_like else -1)
     return r
 
 class Question(models.Model):
@@ -15,6 +16,7 @@ class Question(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag)
     likes = GenericRelation(Liker)
+    likes_n = models.IntegerField(null=True)
 
     likes_rating = _likes_rating
 
@@ -30,6 +32,7 @@ class Answer(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question)
     likes = GenericRelation(Liker)
+    likes_n = models.IntegerField()
 
     likes_rating = _likes_rating
 

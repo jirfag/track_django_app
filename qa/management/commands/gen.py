@@ -36,15 +36,19 @@ def create_question(idx):
     func_name = random.choice(all_django_funcs)
     question_title = 'Django function "{}"'.format(func_name)
     question_text = random.choice(question_text_templates).format(func_name) + ' ' + random.choice(question_long_templates)
-    q = Question.objects.create(title=question_title, text=question_text)
+    q = Question.objects.create(title=question_title, text=question_text, likes_n=0)
     for _ in range(random.randint(0, 3)):
-        Liker.objects.create(content_object=q, is_like=random.choice((True, True, False)))
+        like = Liker.objects.create(content_object=q, is_like=random.choice((True, True, False)))
+        q.likes_n += (1 if like.is_like else -1)
+    q.save()
 
     for _ in range(random.randint(0, 10)):
         answer_text = random.choice(answer_templates).format(func_name)
-        a = Answer.objects.create(text=answer_text, question=q)
+        a = Answer.objects.create(text=answer_text, question=q, likes_n=0)
         for _ in range(random.randint(0, 3)):
-            Liker.objects.create(content_object=a, is_like=random.choice((True, True, False)))
+            like = Liker.objects.create(content_object=a, is_like=random.choice((True, True, False)))
+            a.likes_n += (1 if like.is_like else -1)
+        a.save()
     print('#{}: created {!r}'.format(idx, q))
 
 class Command(BaseCommand):
