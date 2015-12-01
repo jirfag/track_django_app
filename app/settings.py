@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'lib',
     'account',
     'debug_toolbar',
+    'kombu.transport.django',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -115,3 +116,9 @@ INTERNAL_IPS = ['127.0.0.1']
 
 AUTH_USER_MODEL = 'account.User'
 LOGIN_REDIRECT_URL = '/questions/'
+
+BROKER_URL = 'django://'
+
+EMAIL_HOST = 'mxs.mail.ru'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False

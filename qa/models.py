@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from lib.models import Tag, Liker
+from django.dispatch import receiver
 
 def _likes_rating(self):
     return self.likes_n
@@ -38,3 +39,14 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
+
+@receiver(models.signals.post_save, sender=Answer)
+def on_answer_creation(sender, instance, *args, **kwargs):
+    if kwargs.get('created'):
+        answer = instance
+        from .tasks import send_email_notification
+        send_email_notification.delay(
+            'd.isaev@corp.mail.ru',
+            'New answer to question "{}"'.format(answer.question.title),
+            'You got answer with the text: "{}"'.format(answer.text)
+        )
