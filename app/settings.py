@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'qa',
     'app',
     'lib',
+    'account',
     'debug_toolbar',
 )
 
@@ -111,3 +112,6 @@ STATICFILES_DIRS = (
 )
 
 INTERNAL_IPS = ['127.0.0.1']
+
+AUTH_USER_MODEL = 'account.User'
+LOGIN_REDIRECT_URL = '/questions/'
