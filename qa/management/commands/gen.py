@@ -3,7 +3,7 @@ from qa.models import Question, Answer
 from lib.models import Liker, Tag
 import random
 
-#fgrep -lr "def " . | xargs -P8 -n1 cat | perl -lne '/^def (\w+)\(/ && print $1' >/tmp/all_django_funcs.txt
+#cd /Users/denis/track/env/lib/python2.7/site-packages/django && fgrep -lr "def " . | xargs -P8 -n1 cat | perl -lne '/^def (\w+)\(/ && print $1' >/tmp/all_django_funcs.txt
 
 with open('/tmp/all_django_funcs.txt', 'r') as f:
     all_django_funcs = f.read().splitlines()

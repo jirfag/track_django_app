@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'account',
     'debug_toolbar',
     'kombu.transport.django',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -122,3 +123,11 @@ BROKER_URL = 'django://'
 EMAIL_HOST = 'mxs.mail.ru'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://54.93.40.201:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}

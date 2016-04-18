@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^questions/', include('qa.urls', app_name='qa', namespace='qa')),
     url(r'^test/current_time', get_current_time, name='get-current-time'),
     url(r'^account/', include('account.urls', app_name='account', namespace='account')),
+    url(r'^search/', include('haystack.urls', app_name='search', namespace='search')),
 ]
