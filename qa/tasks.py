@@ -5,4 +5,12 @@ from django.core.mail import send_mail
 
 @shared_task
 def send_email_notification(to, subject, text):
-    send_mail(subject, text, 'robot@disaev.ru', [to], fail_silently=False)
+    print('sending email...')
+    send_mail(subject, text, 'idenxxx@mail.ru', [to], fail_silently=False)
+    print('successfully sent email')
+
+@shared_task
+def print_num(n):
+    print(n)
+    from time import sleep
+    sleep(2.0)

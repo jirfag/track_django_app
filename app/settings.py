@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'lib',
     'account',
     'debug_toolbar',
+    'djcelery',
     'kombu.transport.django',
     'haystack',
 )
@@ -120,9 +121,16 @@ LOGIN_REDIRECT_URL = '/questions/'
 
 BROKER_URL = 'django://'
 
-EMAIL_HOST = 'mxs.mail.ru'
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
+#EMAIL_HOST = 'smtp.mail.ru'
+#EMAIL_PORT = 465
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'idenxxx@mail.ru'
+import os
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
 
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -131,3 +139,8 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'haystack',
     },
 }
+
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'django://'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
