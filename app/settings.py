@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'djcelery',
     'kombu.transport.django',
     'haystack',
+    'crispy_forms',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -138,6 +139,10 @@ HAYSTACK_CONNECTIONS = {
         'URL': 'http://54.93.40.201:9200/',
         'INDEX_NAME': 'haystack',
     },
+#    'wh': {
+#        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+#        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+#    },
 }
 
 import djcelery

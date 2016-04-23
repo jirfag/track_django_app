@@ -57,5 +57,5 @@ class Command(BaseCommand):
         Answer.objects.all().delete()
         Liker.objects.all().delete()
         Tag.objects.all().delete()
-        for i in range(10000):
+        for i in range(100):
             create_question(i)

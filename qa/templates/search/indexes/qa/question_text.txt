@@ -1,0 +1,5 @@
+{{ object.title }}
+{{ object.text }}
+{% for answer in object.answer_set.all %}
+  {{ answer.text }}
+{% endfor %}
